@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+</head>
+<body>
+	<h1>Cadastrar Livro</h1>
+	
+	<form th:action="@{/save}" th:object="${livro}" method="post">
+		Título: <input type="text" th:field="*{titulo}"> <br>
+		Descrição: <input type="text" th:field="*{descricao}"> <br>
+		Ano: <input type="number" th:field="*{ano}"> <br>
+		Avaliação: <input type="number" th:field="*{avaliacao}"> <br>
+		<input type="hidden" th:field= "*{id}">
+		<input type="submit" value="Salvar">
+	</form>
+	<h1>Lista de Livros</h1>
+	
+	<table>
+	
+		<tr>
+			<th>Título</th>
+			<th>Descrição</th>
+			<th>Ano</th>
+			<th>Preço</th>
+			
+		</tr>
+		<tr th:each="livro : ${lista}">
+			<td th:text="${livro.titulo}"></td>
+			<td th:text="${livro.descricao}"></td>
+			<td th:text="${livro.ano}"></td>
+			<td th:text="${livro.avaliacao}"></td>
+			<td>
+				<a th:href="@{'/update/' + ${livro.id}}"><img width="40px" height="40px" th:src="@{/img/prancheta.png}"/></a> 
+			
+			</td>
+			<td>
+				<a th:href="@{'/delete/' + ${livro.id}}"><img width="40px" height="40px" th:src="@{/img/lixeira.png}"/> </a>
+			
+			</td>
+			
+			
+		</tr>
+	
+	
+	</table>
+</body>
+</html>
